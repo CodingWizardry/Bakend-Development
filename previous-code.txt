@@ -1,0 +1,47 @@
+// Create User
+app.get("/create", async (req, res) => {
+  try {
+    let userCreated = await userModel.create({
+      name: "rahul",
+      email: "rahul@example.com",
+      username: "rahul123",
+    });
+    res.json(userCreated);
+  } catch (error) {
+    console.log("error", error);
+  }
+});
+
+// Update User
+app.get("/update", async (req, res) => {
+  try {
+    let updatedUser = await userModel.findOneAndUpdate(
+      { name: "harsh" },
+      { name: "mudit" },
+      { new: true }
+    );
+    res.json(updatedUser);
+  } catch (error) {
+    console.log("error", error);
+  }
+});
+
+// User List
+app.get("/list", async (req, res) => {
+    try {
+      let userList = await userModel.find();
+      res.json(userList);
+    } catch (error) {
+      console.log("error", error);
+    }
+  });
+
+// Delete User
+app.get("/delete", async (req, res) => {
+    try {
+      let deletedUser = await userModel.findOneAndDelete({name:'rahul'});
+      res.json(deletedUser);
+    } catch (error) {
+      console.log("error", error);
+    }
+  });
